@@ -1,4 +1,5 @@
 export default function Image({ src, ...rest }) {
+  console.log(src);
   src =
     src && src.includes("https://")
       ? src
