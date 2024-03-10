@@ -3,7 +3,7 @@ import Image from "./Image";
 
 export default function PlaceGallery({ place }) {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
-
+  console.log(place);
   if (showAllPhotos) {
     return (
       <div className="absolute inset-0 bg-black text-white min-h-screen">

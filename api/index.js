@@ -118,15 +118,16 @@ const photosMiddleware = multer({ dest: "uploads" });
 app.post("/upload", photosMiddleware.array("photos", 100), (req, res) => {
   const uploadedFiles = [];
   for (let i = 0; i < req.files.length; i++) {
-    const { path, originalname } = req.files[i];
+    const { path, originalname, mimetype } = req.files[i];
     const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
     uploadedFiles.push(newPath.replace("uploads/", ""));
   }
-  res.json(req.files);
+  res.json(uploadedFiles);
 });
+
 app.post("/places", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
